@@ -1,2 +1,4 @@
 # machinegame
-machinegame - code to play
+code to play
+
+Challenge me at https://www.machinegame/vs/acavailhez
