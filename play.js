@@ -16,6 +16,9 @@ function play(state) {
         if (otherRobot) {
             if (distanceBetween(robot, otherRobot) <= 1) {
                 robot.attack(otherRobot);
+                if(otherRobot.charges <= 1 && !deaths.includes(otherRobots)){
+                    deaths.push(otherRobot);
+                }
             } else {
                 robot.moveTo(otherRobot);
             }
@@ -48,12 +51,20 @@ function play(state) {
                         var otherRobot = nearRobots[j];
                         totalDistance += distanceBetween(otherRobot, newPt);
                     }
+
+                    // Move towards our flag to defend
                     totalDistance -= distanceBetween(state.flag, newPt);
+
+                    // Move towards deaths to get closer to the action
+                    for (var j = 0; j < deaths.length; j++) {
+                        var death = deaths[j];
+                        totalDistance -= distanceBetween(death, newPt)/4;
+                    }
+
                     if (totalDistance > maxDistance) {
                         maxDistance = totalDistance;
                         bestMoves = [newPt];
-                    }
-                    if (totalDistance === maxDistance) {
+                    } else if (totalDistance === maxDistance) {
                         bestMoves.push(newPt);
                     }
                 }
@@ -64,6 +75,8 @@ function play(state) {
         }
     }
 }
+
+var deaths = [];
 
 var MOVES = [
     {x: -1, y: -1},
