@@ -1,4 +1,4 @@
 # machinegame
-code to play
+a game where you code to play
 
-Challenge me at https://www.machinegame/vs/acavailhez
+Can you beat my code at https://www.machinegame/vs/acavailhez ?
